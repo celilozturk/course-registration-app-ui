@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  constructor(@Inject("Base_Api_Url") private baseUrl:string){
+    // this.baseUrlString=baseUrl;
+  }
 
 }
