@@ -32,11 +32,11 @@ export class CandidatesComponent {
   }
 
   delete(id: number) {
-    this.swalService.callSwal("course", "Do you want to delete candidate permanently?", () => {
+    this.swalService.callSwal("Candidate", "Do you want to delete candidate permanently?", () => {
       this.candidateService.delete(id).subscribe({
         next: (res) => {
-          this.swalService.callToast("Candidate was deleted Successfully", "success");
           this.getAll();
+          this.swalService.callToast("Candidate was deleted Successfully", "success");
         },
         error: (err) => {
           console.log("Error message:" + err.message);

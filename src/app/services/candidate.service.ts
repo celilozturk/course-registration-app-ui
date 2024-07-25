@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { CourseModel } from '../models/course.model';
 import { CandidateModel } from '../models/candidate.model';
@@ -10,6 +10,7 @@ export class CandidateService {
 
   constructor(private http:HttpClient, @Inject("Base_Api_Url") private baseUrl:string) { }
 
+  
   getAll(){    
     return  this.http.get(`${this.baseUrl}/Candidates`);
   }
@@ -23,6 +24,7 @@ export class CandidateService {
     return this.http.put(`${this.baseUrl}/Candidates`,candidate);
   }
   delete(id:number){
-    return this.http.delete(`${this.baseUrl}/Candidates/${id}`);
+    // 
+    return this.http.delete(`${this.baseUrl}/Candidates`,({body:{id:id}}));
   }
 }
