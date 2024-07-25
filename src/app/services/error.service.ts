@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SwalService } from './swal.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
-  constructor() { }
+  constructor(private swalService:SwalService) { }
 
 
   errorHandler(err:HttpErrorResponse){
@@ -18,7 +19,7 @@ export class ErrorService {
       message="You are not authorized"
     }
     else if (err.status === 404) {
-      message = "API not found!", "error";
+      message = "Not found!", "error";
     }
     else if (err.status === 500) {
       message= "";
@@ -26,5 +27,6 @@ export class ErrorService {
         message += e + "\n";
       }
     }
+    this.swalService.callToast(message,"error");
   }
 }

@@ -3,32 +3,49 @@ import { CourseService } from '../../../services/course.service';
 import { CourseModel } from '../../../models/course.model';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ErrorService } from '../../../services/error.service';
+import { SwalService } from '../../../services/swal.service';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
 export class CoursesComponent implements OnInit {
-  courseList:CourseModel[]=[];
-  course1?:CourseModel;
-  constructor(private courseService:CourseService){ }
+
+  courseList: CourseModel[] = [];
+  course1?: CourseModel;
+  
+  constructor(private courseService: CourseService, private errorService: ErrorService, private swalService: SwalService) { }
+
   async ngOnInit(): Promise<void> {
-   await this.getAll();
+    await this.getAll();
   }
-   getAll(){
-    this.courseService.getAll().subscribe((res:any)=>{   
-      this.courseList=res.items;
+  getAll() {
+    this.courseService.getAll().subscribe({
+      next: (res: any) => {
+        this.courseList = res.items;
+      },
+      error: (err) => {
+        this.errorService.errorHandler(err);
+      }
     });
   }
-  getById(id:number){
-      this.courseService.get(id).subscribe((res:any)=>{
-        this.course1=res;
-        console.log(res);
+
+  delete(id: number) {
+    this.swalService.callSwal("course", "Do you want to delete this course permanently?", () => {
+      this.courseService.delete(id).subscribe({
+        next: (res) => {
+          this.swalService.callToast("course was deleted Successfully", "success");
+          this.getAll();
+        },
+        error: (err) => {
+          console.log("Error message:" + err.message);
+          this.errorService.errorHandler(err);
+        }
       })
+    });
   }
-
-
 }

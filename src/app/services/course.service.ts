@@ -19,4 +19,7 @@ export class CourseService {
   update(courseUpdateModel:CourseModel){
     return this.http.put(`${this.baseUrl}/Courses/Update`,courseUpdateModel);
   }
+  delete(id:number){
+    return this.http.delete(`${this.baseUrl}/Courses/Delete/${id}`);
+  }
 }
