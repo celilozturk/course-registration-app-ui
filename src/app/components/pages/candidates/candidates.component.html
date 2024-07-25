@@ -30,7 +30,7 @@
                 <td>{{candidate.email}}</td>
                 <td>{{candidate.age}}</td>
                 <td>
-                    <button title="Update" routerLink="candidate-detail/{{candidate.id}}" class="btn btn-sm btn-outline-secondary me-1">Update Profile</button>
+                    <button title="Update" routerLink="candidate-update/{{candidate.id}}" class="btn btn-sm btn-outline-secondary me-1">Update Profile</button>
                     <button title="Delete" (click)="delete(candidate.id!)" class="btn btn-sm btn-outline-danger">Delete</button>
                 </td>
             </tr>

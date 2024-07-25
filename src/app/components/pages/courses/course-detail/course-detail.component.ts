@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { CourseService } from '../../../../services/course.service';
 import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
 import { CourseModel } from '../../../../models/course.model';
@@ -14,26 +14,29 @@ import { SwalService } from '../../../../services/swal.service';
   templateUrl: './course-detail.component.html',
   styleUrl: './course-detail.component.css'
 })
-export class CourseDetailComponent {
+export class CourseDetailComponent implements OnInit {
   course:CourseModel=new CourseModel();
   courseId:number=0;
   constructor(private courseService:CourseService,private errorService:ErrorService, private activatedRoute:ActivatedRoute, private router:Router,private swalService:SwalService){
-      this.courseId=Number(activatedRoute.snapshot.paramMap.get("id"));
-      courseService.get(this.courseId).subscribe((res:any)=>{
-        this.course=res;
-      },(err)=>{
-        this.errorService.errorHandler(err);
-        console.log("error occured!");
-      });
+    
+  }
+  ngOnInit(): void {
+    this.courseId=Number(this.activatedRoute.snapshot.paramMap.get("id"));
+    this.courseService.get(this.courseId).subscribe({next:(res:any)=>{
+      this.course=res;
+    },error:(err)=>{
+      this.errorService.errorHandler(err);
+      console.log("error occured!");
+    }});
   }
   update(form:NgForm){
     if(form.valid){
       //console.log(this.course);
-      this.courseService.update(this.course).subscribe((res:any)=>{
+      this.courseService.update(this.course).subscribe({next:(res:any)=>{
         console.log(res);
         this.swalService.callToast("Course was updated successfully","success");
         this.router.navigateByUrl("/courses");
-      },(err)=>this.errorService.errorHandler(err));
+      },error:(err)=>this.errorService.errorHandler(err)});
     }
   }
 }
