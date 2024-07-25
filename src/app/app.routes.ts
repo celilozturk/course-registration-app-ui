@@ -6,6 +6,7 @@ import { NotFoundComponent } from './components/pages/not-found/not-found.compon
 import { CoursesComponent } from './components/pages/courses/courses.component';
 import { CandidatesComponent } from './components/pages/candidates/candidates.component';
 import { EnrollmentsComponent } from './components/pages/enrollments/enrollments.component';
+import { CourseDetailComponent } from './components/pages/courses/course-detail/course-detail.component';
 
 export const routes: Routes = [
     {path:"login", component:LoginComponent},
@@ -15,6 +16,7 @@ export const routes: Routes = [
         children:[
             { path:"", component:HomeComponent },            
             { path:"courses", component:CoursesComponent },            
+            { path:"courses/course-detail/:id", component:CourseDetailComponent },            
             { path:"candidates", component:CandidatesComponent },            
             { path:"enrollments", component:EnrollmentsComponent },            
             { path:"", component:HomeComponent },            

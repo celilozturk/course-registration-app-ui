@@ -13,7 +13,7 @@ export class CourseService {
    getAll(){    
     return  this.http.get(`${this.baseUrl}/Courses/GetAll`);
   }
-  getById(){
-    
+  get(id:number){
+    return  this.http.get(`${this.baseUrl}/Courses/GetById/${id}`);
   }
 }
