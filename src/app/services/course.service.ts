@@ -16,4 +16,7 @@ export class CourseService {
   get(id:number){
     return  this.http.get(`${this.baseUrl}/Courses/GetById/${id}`);
   }
+  update(courseUpdateModel:CourseModel){
+    return this.http.put(`${this.baseUrl}/Courses/Update`,courseUpdateModel);
+  }
 }
