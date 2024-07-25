@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="col-lg-8 offset-lg-2 col-md-6 offset-md-3 col-sm-12">
+<div class="col-lg-8 offset-lg-2 col-md-6 offset-md-3 col-sm-12 mt-5">
     <form #updateform="ngForm" (ngSubmit)="update(updateform)">
         <div class="mt-2">
             <label class="form-label">Course Name</label>
@@ -25,14 +25,14 @@
             </div>
         </div>
         <div class="my-3">
-            <label class="form-label">Total Paticipanst</label>
+            <label class="form-label">Total Participants</label>
             <input type="number" name="totalParticipants" #totalParticipants="ngModel" class="form-control" [(ngModel)]="course.totalParticipants" required maxlength="3">
             <div class="alert alert-danger" *ngIf="totalParticipants.invalid && (totalParticipants.dirty || totalParticipants.touched)">
                     <div *ngIf="totalParticipants.errors?.['required']">Participant is required</div>
             </div>
         </div>
-        <button class="btn btn-info w-100">Update</button>
-    
+        <button type="submit" class="btn btn-info w-100">Update</button>    
+        <button   class="btn btn-dark w-100 mt-2" routerLink="/courses">Back</button>
     </form>
 </div>
 
