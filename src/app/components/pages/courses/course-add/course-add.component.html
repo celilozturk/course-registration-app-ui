@@ -27,7 +27,7 @@
         </div>
         <div class="my-3">
             <label class="form-label">Total Participants</label>
-            <input type="number" name="totalParticipants" #totalParticipants="ngModel" class="form-control" [(ngModel)]="course.totalParticipants" required maxlength="3">
+            <input type="number" name="totalParticipants" #totalParticipants="ngModel" class="form-control" [(ngModel)]="course.totalPaticipants" required maxlength="3">
             <div class="alert alert-danger" *ngIf="totalParticipants.invalid && (totalParticipants.dirty || totalParticipants.touched)">
                     <div *ngIf="totalParticipants.errors?.['required']">Participant is required</div>
             </div>

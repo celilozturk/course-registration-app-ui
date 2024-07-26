@@ -19,13 +19,13 @@ export class SwalService {
       toast:true
     })
   }
-  callSwal(title:string, text:string, callBack: ()=>void){
+  callSwal(title:string, text:string,confirmButtonText:string, callBack: ()=>void){
     Swal.fire({
       title:title,
       text:text,
       icon: "question",
       showConfirmButton:true,
-      confirmButtonText:"Delete",
+      confirmButtonText:confirmButtonText,
       showCancelButton:true,
       cancelButtonText:"Cancel"
     }).then(res=>{

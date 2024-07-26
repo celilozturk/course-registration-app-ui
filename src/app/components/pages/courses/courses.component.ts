@@ -35,7 +35,7 @@ export class CoursesComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.swalService.callSwal("course", "Do you want to delete this course permanently?", () => {
+    this.swalService.callSwal("course", "Do you want to delete this course permanently?", "Delete",() => {
       this.courseService.delete(id).subscribe({
         next: (res) => {
           this.swalService.callToast("course was deleted Successfully", "success");

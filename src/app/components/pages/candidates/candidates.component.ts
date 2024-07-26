@@ -32,7 +32,7 @@ export class CandidatesComponent {
   }
 
   delete(id: number) {
-    this.swalService.callSwal("Candidate", "Do you want to delete candidate permanently?", () => {
+    this.swalService.callSwal("Candidate", "Do you want to delete candidate permanently?","Delete", () => {
       this.candidateService.delete(id).subscribe({
         next: (res) => {
           this.getAll();
