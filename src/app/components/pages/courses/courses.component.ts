@@ -5,11 +5,13 @@ import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ErrorService } from '../../../services/error.service';
 import { SwalService } from '../../../services/swal.service';
+import { FormsModule } from '@angular/forms';
+import { CoursePipe } from "../../../pipes/course.pipe";
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule, CoursePipe],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
@@ -17,7 +19,7 @@ export class CoursesComponent implements OnInit {
 
   courseList: CourseModel[] = [];
   course1?: CourseModel;
-  
+  search:string="";
   constructor(private courseService: CourseService, private errorService: ErrorService, private swalService: SwalService) { }
 
   async ngOnInit(): Promise<void> {
