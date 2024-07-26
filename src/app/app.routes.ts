@@ -10,6 +10,7 @@ import { CourseDetailComponent } from './components/pages/courses/course-detail/
 import { CourseAddComponent } from './components/pages/courses/course-add/course-add.component';
 import { CandidateAddComponent } from './components/pages/candidates/candidate-add/candidate-add.component';
 import { CandidateUpdateComponent } from './components/pages/candidates/candidate-update/candidate-update.component';
+import { EnrollmentAddComponent } from './components/pages/enrollments/enrollment-add/enrollment-add.component';
 
 export const routes: Routes = [
     {path:"login", component:LoginComponent},
@@ -25,6 +26,7 @@ export const routes: Routes = [
             { path:"candidates/candidate-add", component:CandidateAddComponent },            
             { path:"candidates/candidate-update/:id", component:CandidateUpdateComponent },            
             { path:"enrollments", component:EnrollmentsComponent },            
+            { path:"enrollments/enrollment-add", component:EnrollmentAddComponent },            
             { path:"", component:HomeComponent },            
         ]
     },

@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { EnrollmentModel } from '../models/enrollment.model';
 import { HttpClient } from '@angular/common/http';
 import { EnrollmentUpdateModel } from '../models/enrollment-update.model';
+import { EnrollmentAddModel } from '../models/enrollment-add.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class EnrollmentService {
   get(id:number){
     return  this.http.get(`${this.baseUrl}/Enrollments/${id}`);
   }
-  add(enrollment:EnrollmentModel){
+  add(enrollment:EnrollmentAddModel){
     return this.http.post(`${this.baseUrl}/Enrollments`,enrollment);
   }
   update(enrollment:EnrollmentModel){
