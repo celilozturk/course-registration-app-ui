@@ -7,6 +7,7 @@ import { CourseModel } from '../../../models/course.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationModel } from '../../../models/application.model';
+import { ApplicationService } from '../../../services/application.service';
 
 @Component({
   selector: 'app-applications',
@@ -20,8 +21,9 @@ export class ApplicationsComponent implements OnInit {
   courseSelected:CourseModel=new CourseModel();
   application:ApplicationModel=new ApplicationModel();
   courseId:number=1;
-  constructor(private router: Router, private courseService: CourseService, private errorService: ErrorService, private swalService: SwalService,private activatedRoute:ActivatedRoute) { 
+  constructor(private applicationService:ApplicationService,private router: Router, private courseService: CourseService, private errorService: ErrorService, private swalService: SwalService,private activatedRoute:ActivatedRoute) { 
     this.courseId=Number(this.activatedRoute.snapshot.paramMap.get("id"));
+    this.application.courseId=this.courseId;
     //console.warn(this.courseId);
   }
   ngOnInit(): void {
@@ -50,6 +52,15 @@ export class ApplicationsComponent implements OnInit {
   createApplication(form:NgForm){    
     if(form.valid){
         console.log(this.application);
+        this.applicationService.add(this.application).subscribe({
+          next:(res)=>{
+            this.swalService.callToast("You have applied successfully!");
+            this.router.navigateByUrl("/");
+          },
+          error:(err)=>{
+            this.errorService.errorHandler(err);
+          }
+        });
     }
   }
 }
