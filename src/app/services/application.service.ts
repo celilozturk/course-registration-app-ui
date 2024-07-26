@@ -12,4 +12,7 @@ export class ApplicationService {
   add(application:ApplicationModel){
     return this.http.post(`${this.baseUrl}/Applications`,application);
   }
+  getApplicationCountByCourseId(courseId:number){
+    return this.http.get(`${this.baseUrl}/Applications/${courseId}`);
+  }
 }

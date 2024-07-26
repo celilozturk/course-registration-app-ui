@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CourseService } from '../../../services/course.service';
 import { ErrorService } from '../../../services/error.service';
 import { SwalService } from '../../../services/swal.service';
@@ -12,7 +12,7 @@ import { ApplicationService } from '../../../services/application.service';
 @Component({
   selector: 'app-applications',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,RouterLink],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.css'
 })
@@ -20,7 +20,9 @@ export class ApplicationsComponent implements OnInit {
   courseList: CourseModel[] = [];
   courseSelected:CourseModel=new CourseModel();
   application:ApplicationModel=new ApplicationModel();
-  courseId:number=1;
+  courseId:number=0;
+  applicationCount:number=0;
+  totalParticipants:number=0;
   constructor(private applicationService:ApplicationService,private router: Router, private courseService: CourseService, private errorService: ErrorService, private swalService: SwalService,private activatedRoute:ActivatedRoute) { 
     this.courseId=Number(this.activatedRoute.snapshot.paramMap.get("id"));
     this.application.courseId=this.courseId;
@@ -29,6 +31,7 @@ export class ApplicationsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCourses();
     this.getCourseById(this.courseId);
+    this.getApplicationCountByCourseId(this.courseId);
   }
 
   getAllCourses() {
@@ -47,6 +50,17 @@ export class ApplicationsComponent implements OnInit {
         this.errorService.errorHandler(err);
       }
     })
+  }
+  getApplicationCountByCourseId(courseId:number){
+    this.applicationService.getApplicationCountByCourseId(courseId).subscribe({
+      next:(res:any)=>{
+          this.applicationCount=res.applicationCount;
+          this.totalParticipants=res.totalParticipants;
+      },
+      error:(err)=>{
+        this.errorService.errorHandler(err);
+      }
+    });
   }
  
   createApplication(form:NgForm){    
