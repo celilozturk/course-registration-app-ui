@@ -5,11 +5,13 @@ import { ErrorService } from '../../../services/error.service';
 import { SwalService } from '../../../services/swal.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CoursePipe } from "../../../pipes/course.pipe";
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, CoursePipe, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,7 +19,7 @@ export class HomeComponent {
   
   courseList: CourseModel[] = [];
   course1?: CourseModel;
-  
+  search:string="";
   constructor(private courseService: CourseService, private errorService: ErrorService, private swalService: SwalService) { }
 
   async ngOnInit(): Promise<void> {

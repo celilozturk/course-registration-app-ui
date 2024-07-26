@@ -8,7 +8,17 @@
     </nav>
 </div>
 <h1 class="text-center">Welcome to The Free Course Page</h1>
-<div class="mt-5">
+<div class="row">
+    <div class="d-flex justify-content-start mb-3 ">
+        <div class="col-md-4">
+          <div class="form-group offset-0">
+            <input class="form-control" [(ngModel)]="search" [ngModelOptions]="{standalone:true}" type="search" placeholder="Search in Course List" aria-label="Search in Course List">
+          </div>
+        </div>
+    </div>
+
+</div>
+<div class="mt-2">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -19,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-        @for(course of courseList; track course){
+        @for(course of courseList | course:search; track course){
             <tr>
                 <td>{{course.id}}</td>
                 <td>{{course.name}}</td>
