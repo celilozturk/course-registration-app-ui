@@ -37,7 +37,6 @@
                 </td>
                 <td>
                     <button title="Approve" (click)="approve(enrollment.id!)"  class="btn btn-sm btn-outline-success me-1" *ngIf="!enrollment.isApproved">Approve</button>
-                    <button title="Update" routerLink="enrollment-update/{{enrollment.id}}" class="btn btn-sm btn-outline-secondary me-1">Update Enrollments</button>
                     <button title="Delete" (click)="delete(enrollment.id!)" class="btn btn-sm btn-outline-danger">Delete</button>
                 </td>
             </tr>

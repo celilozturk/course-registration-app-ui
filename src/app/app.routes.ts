@@ -11,6 +11,7 @@ import { CourseAddComponent } from './components/pages/courses/course-add/course
 import { CandidateAddComponent } from './components/pages/candidates/candidate-add/candidate-add.component';
 import { CandidateUpdateComponent } from './components/pages/candidates/candidate-update/candidate-update.component';
 import { EnrollmentAddComponent } from './components/pages/enrollments/enrollment-add/enrollment-add.component';
+import { ApplicationsComponent } from './components/pages/applications/applications.component';
 
 export const routes: Routes = [
     {path:"login", component:LoginComponent},
@@ -18,7 +19,8 @@ export const routes: Routes = [
         path:"",
         component:DefaultLayoutComponent, 
         children:[
-            { path:"", component:HomeComponent },            
+            { path:"", component:HomeComponent },     
+            { path:"applications/:id", component:ApplicationsComponent },            
             { path:"courses", component:CoursesComponent },            
             { path:"courses/course-detail/:id", component:CourseDetailComponent },            
             { path:"courses/course-add", component:CourseAddComponent },            
