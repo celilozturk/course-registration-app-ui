@@ -36,8 +36,8 @@ export class EnrollmentsComponent {
     this.swalService.callSwal("Enrollment", "Do you want to delete the enrollment permanently?","Delete", () => {
       this.enrollmentService.delete(id).subscribe({
         next: (res) => {
-          this.getAll();
           this.swalService.callToast("Enrollment was deleted Successfully", "success");
+          this.getAll();
         },
         error: (err) => {
           console.log("Error message:" + err.message);
